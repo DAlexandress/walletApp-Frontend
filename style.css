@@ -66,8 +66,8 @@ button {
   cursor: pointer;
 }
 button.small {
-  background-color: #f4f4f9;
-  color: #010400;
+  background-color: #fffdf7;
+  color: #096568;
   font-size: 14px;
   border-radius: 8px;
   width: 90px;
