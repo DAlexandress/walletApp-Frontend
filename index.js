@@ -3,6 +3,7 @@ const validateUser = async (email) => {
     const result = await fetch(
       `https://mp-wallet-app-api.herokuapp.com/users?email=${email}`
     );
+    console.log(result);
     const user = await result.json();
     return user;
   } catch (error) {

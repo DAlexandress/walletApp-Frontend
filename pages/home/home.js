@@ -1,3 +1,55 @@
+const renderFinanceList = (data) => {
+  console.log(data);
+  const table = document.getElementById("finances-table");
+
+  data.map((item) => {
+    const tableRow = document.createElement("tr");
+
+    //tiltle
+    const titleTD = document.createElement("td");
+    const titleText = document.createTextNode(item.title);
+    titleTD.appendChild(titleText);
+    tableRow.appendChild(titleTD);
+
+    //category
+    const categoryTD = document.createElement("td");
+    const categoryText = document.createTextNode(item.name);
+    categoryTD.appendChild(categoryText);
+    tableRow.appendChild(categoryTD);
+
+    //date
+    const dateTD = document.createElement("td");
+    const dateText = document.createTextNode(
+      new Date(item.date).toLocaleDateString()
+    );
+    dateTD.appendChild(dateText);
+    tableRow.appendChild(dateTD);
+
+    //value
+    const valueTD = document.createElement("td");
+    valueTD.className = "center";
+    const valueText = document.createTextNode(
+      new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(item.value)
+    );
+
+    valueTD.appendChild(valueText);
+    tableRow.appendChild(valueTD);
+
+    //delete
+    const deleteTD = document.createElement("td");
+    deleteTD.className = "right";
+    const deleteText = document.createTextNode("Deletar");
+    deleteTD.appendChild(deleteText);
+    tableRow.appendChild(deleteTD);
+
+    //table add tableRow
+    table.appendChild(tableRow);
+  });
+};
+
 const renderFinanceElements = (data) => {
   const totalItems = data.length;
   const revenues = data
@@ -59,7 +111,7 @@ const renderFinanceElements = (data) => {
 
 const onloadFinancesData = async () => {
   try {
-    const date = "2024-10-31";
+    const date = "2023-12-15";
     const email = localStorage.getItem("@WalletApp:userEmail");
     const result = await fetch(
       `https://mp-wallet-app-api.herokuapp.com/finances?date=${date}`,
@@ -70,8 +122,11 @@ const onloadFinancesData = async () => {
         },
       }
     );
+
     const data = await result.json();
+    console.log(data);
     renderFinanceElements(data);
+    renderFinanceList(data);
     return data;
   } catch (error) {
     return { error };
