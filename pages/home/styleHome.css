@@ -63,6 +63,7 @@
 
 .table-container {
   display: flex;
+
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
@@ -96,11 +97,16 @@
 
 table {
   width: 100%;
+  border-collapse: collapse;
 }
 
 th {
   text-align: left;
   color: #707070;
+}
+
+tr {
+  height: 32px;
 }
 
 th.right {
@@ -112,6 +118,7 @@ th.center {
 }
 td {
   color: #707070;
+  padding: 10px;
 }
 
 td.right {
@@ -120,4 +127,34 @@ td.right {
 
 td.center {
   text-align: center;
+}
+
+.modal-background {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(1, 4, 0, 0.2);
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal-content {
+  height: 100%;
+  width: 480px;
+  background-color: #fffefa;
+  padding: 24px;
+  box-sizing: border-box;
+}
+.modal-content-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
