@@ -1,5 +1,7 @@
 # Wallet App
 
+<img src="https://github.com/DAlexandress/walletApp-Frontend/blob/master/SRC/IMG/preview.PNG" alt="WalletApp preview" heigth="500">
+
 ## Introduction
 
 The Wallet App is a personal financial management application built using JavaScript, CSS, and HTML.
