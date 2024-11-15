@@ -1,3 +1,8 @@
+const onLogout = () => {
+  localStorage.clear();
+  window.open("../../index.html", "_self");
+};
+
 const onDeleteItem = async (id) => {
   try {
     const email = localStorage.getItem("@WalletApp:userEmail");
@@ -190,10 +195,10 @@ const renderFinanceElements = (data) => {
 
 const onloadFinancesData = async () => {
   try {
-    const date = "2023-12-15";
+    const dateInputValue = document.getElementById("select-date").value;
     const email = localStorage.getItem("@WalletApp:userEmail");
     const result = await fetch(
-      `https://mp-wallet-app-api.herokuapp.com/finances?date=${date}`,
+      `https://mp-wallet-app-api.herokuapp.com/finances?date=${dateInputValue}`,
       {
         method: "GET",
         headers: {
@@ -221,6 +226,7 @@ const onLoadUserInfo = () => {
 
   //add user email
   const emailElement = document.createElement("p");
+  emailElement.style.textDecoration = "underline";
   const emailText = document.createTextNode(email);
   emailElement.appendChild(emailText);
   navbarUserInfo.appendChild(emailElement);
@@ -228,7 +234,7 @@ const onLoadUserInfo = () => {
   //add logout link
   const logoutElement = document.createElement("a");
   logoutElement.style.cursor = "pointer";
-  logoutElement.href = "../../index.html";
+  logoutElement.onclick = () => onLogout();
   const logoutText = document.createTextNode("Sair");
   logoutElement.appendChild(logoutText);
   navbarUserInfo.appendChild(logoutElement);
@@ -265,6 +271,10 @@ const onOpenModal = () => {
 const onCloseModal = () => {
   const modal = document.getElementById("modal");
   modal.style.display = "none";
+  const inputs = modal.querySelectorAll("input, textarea");
+  inputs.forEach((input) => {
+    input.value = "";
+  });
 };
 
 const onCallAddFinance = async (data) => {
@@ -317,7 +327,17 @@ const onCreateFinanceRelease = async (target) => {
   }
 };
 
+const setInitialDate = () => {
+  const dateInput = document.getElementById("select-date");
+  const nowDate = new Date().toISOString().split("T")[0];
+  dateInput.value = nowDate;
+  dateInput.addEventListener("change", () => {
+    onloadFinancesData();
+  });
+};
+
 window.onload = () => {
+  setInitialDate();
   onLoadUserInfo();
   onloadFinancesData();
   onLoadCategories();
