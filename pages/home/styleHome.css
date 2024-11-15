@@ -41,6 +41,12 @@
   background-color: #b6e7e9;
 }
 
+.navbar-table-header th {
+  background-color: #f1ede2;
+  font-weight: bold;
+  text-align: left;
+}
+
 .finance-card-container {
   display: flex;
   width: 100%;
@@ -83,6 +89,7 @@
   height: 592px;
   padding: 24px;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .table-content-header {
@@ -103,6 +110,9 @@ table {
 th {
   text-align: left;
   color: #707070;
+  padding: 10px;
+  border-bottom: 2px solid #dddddd;
+  width: 20%;
 }
 
 tr {
@@ -119,6 +129,8 @@ th.center {
 td {
   color: #707070;
   padding: 10px;
+  border-bottom: 1px solid #ddd;
+  width: 20%;
 }
 
 td.right {

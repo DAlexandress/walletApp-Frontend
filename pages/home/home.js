@@ -1,8 +1,24 @@
+const onDeleteItem = async (id) => {
+  try {
+    const email = localStorage.getItem("@WalletApp:userEmail");
+    await fetch(`https://mp-wallet-app-api.herokuapp.com/finances/${id}`, {
+      method: "DELETE",
+      headers: {
+        email: email,
+      },
+    });
+    onloadFinancesData();
+  } catch (error) {
+    alert("Erro ao deletar item");
+  }
+};
+
 const renderFinanceList = (data) => {
   const table = document.getElementById("finances-table");
   table.innerHTML = "";
 
   const tableHeader = document.createElement("tr");
+  tableHeader.className = "navbar-table-header th";
 
   const titleText = document.createTextNode("Título");
   const titleElement = document.createElement("th");
@@ -71,8 +87,12 @@ const renderFinanceList = (data) => {
 
     //delete
     const deleteTD = document.createElement("td");
+    deleteTD.onclick = () => onDeleteItem(item.id);
+    deleteTD.style.cursor = "pointer";
     deleteTD.className = "right";
-    const deleteText = document.createTextNode("Deletar");
+    const deleteText = document.createElement("span");
+    deleteText.textContent = "Deletar";
+    deleteText.style.textDecoration = "underline";
     deleteTD.appendChild(deleteText);
     tableRow.appendChild(deleteTD);
 
@@ -207,6 +227,8 @@ const onLoadUserInfo = () => {
 
   //add logout link
   const logoutElement = document.createElement("a");
+  logoutElement.style.cursor = "pointer";
+  logoutElement.href = "../../index.html";
   const logoutText = document.createTextNode("Sair");
   logoutElement.appendChild(logoutText);
   navbarUserInfo.appendChild(logoutElement);
